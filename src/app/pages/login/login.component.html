@@ -1,0 +1,24 @@
+<div class="flex align-items-center justify-content-center min-h-screen min-w-screen">
+  <p-card [style]="{width: '900px'}">
+    <div class="grid flex align-items-center justify-content-center">
+      <div class="md:col-8 lg:col-7 xl:col-6 mr-6">
+        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg" width="550px"
+          class="img-fluid" alt="Phone image">
+      </div>
+      <div class="md:col-7 lg:col-5 xl:col-5 xl:offset-1">
+        <form id="forms" (ngSubmit)="login()">
+          <label for="email" class="mb-2 font-medium">Email Address</label>
+          <input id="email" type="email" pInputText placeholder="Email address" name="email" pInputText
+            class="w-full md:w-30rem mb-5" style="padding:1rem" [(ngModel)]="loginReq.email">
+
+          <label for="password" class="mb-2 font-medium">Password</label>
+          <p-password inputId="passwords" [feedback]="false" [toggleMask]="true" styleClass="mb-5"
+            inputStyleClass="w-full p-3 md:w-30rem" name="passwords" placeholder="Password"
+            [(ngModel)]="loginReq.passwords">
+          </p-password>
+          <button pButton type="submit" class="btn btn-primary btn-lg btn-block mb-2">Sign in</button>
+        </form>
+      </div>
+    </div>
+  </p-card>
+</div>

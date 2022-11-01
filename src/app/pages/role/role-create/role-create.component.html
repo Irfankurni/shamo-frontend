@@ -1,0 +1,15 @@
+<div class="flex align-items-center justify-content-center min-h-screen">
+    <p-card styleClass="card">
+        <button class="btn btn-back" routerLink="/roles"><i class="bi bi-arrow-left"></i> Back</button>
+        <h3 class="text-center mb-8">Add Roles</h3>
+        <div class="md:col-7 lg:col-5 xl:col-5 xl:offset-1">
+          <form id="forms" (ngSubmit)="submit()">
+            <label for="Role" class="mb-2 font-medium">Role Type</label>
+            <input id="Role" type="Role" placeholder="Role" name="Role" pInputText
+              class="w-full md:w-30rem mb-5" style="padding:1rem" [(ngModel)]="role.roleType">
+
+            <button type="submit" class="btn btn-submit btn-lg btn-block mb-2">Submit</button>
+          </form>
+        </div>
+    </p-card>
+  </div>

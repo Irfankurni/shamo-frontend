@@ -1,0 +1,12 @@
+body {
+    padding-bottom: 20px;
+  }
+  
+  .navbar {
+    margin-bottom: 20px;
+  }  
+
+.bg-blue {
+    background-color: #1F1D2B !important;
+    color: white;
+}

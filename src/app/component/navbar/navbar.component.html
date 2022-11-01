@@ -1,0 +1,51 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-blue py-3">
+  <div class="container">
+    <img src="../../../assets/images/logo.png" alt="logo" width="32" />
+    <a class="navbar-brand ms-2" href="#">Shamo</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbars"
+      aria-controls="navbars" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbars">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" aria-current="page" routerLink="/home">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="/roles">Roles</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle cursor-pointer" data-bs-toggle="dropdown" aria-expanded="false">Product</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" routerLinkActive="active" routerLink="/products">Products</a></li>
+            <li><a class="dropdown-item" routerLinkActive="active" routerLink="/product-categories">Product Category</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="/transactions">Transaction</a>
+        </li>
+      </ul>
+      <div class="dropdown text-end">
+        <a href="#" class="d-block link-light text-decoration-none dropdown-toggle" data-bs-toggle="dropdown"
+          aria-expanded="false">
+          <!-- <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle"> -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-person-circle"
+            viewBox="0 0 16 16">
+            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+            <path fill-rule="evenodd"
+              d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+          </svg>
+        </a>
+        <ul class="dropdown-menu text-small">
+          <li><a class="dropdown-item" href="#"><i class="bi bi-person"></i> Profile</a></li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li><a class="dropdown-item" href="#"><i class="bi bi-box-arrow-right"></i> Sign out</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+<router-outlet></router-outlet>

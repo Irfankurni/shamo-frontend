@@ -1,0 +1,23 @@
+.btn-submit {
+    background-color: #6C5ECF;
+    border-radius: 12px;
+    color: #F1F0F2;
+    font-weight: 500;
+    width: 120px;
+}
+
+.btn-back {
+    background-color: #6C5ECF;
+    border-radius: 8px;
+    color: #F1F0F2;
+    font-weight: 500;
+}
+
+.input-text {
+    border-radius: 12px;
+}
+
+.card {
+    width: 900px;
+    background-color: #999999
+}
