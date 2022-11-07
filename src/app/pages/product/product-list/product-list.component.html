@@ -1,3 +1,42 @@
 <div class="container">
-    <h1>Products</h1>
+    <p-table [value]="products.data" styleClass="p-datatable-striped mt-8" responsiveLayout="scroll">
+        <ng-template pTemplate="caption">
+            <div class="d-flex justify-content-between">
+                <div class="table-header">
+                    List of Product Category
+                </div>
+                <button class="btn btn-submit" routerLink="/products/create"><i class="bi bi-plus-lg"></i> ADD</button>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th>No.</th>
+                <th>Product Name</th>
+                <th>Is Active</th>
+                <th>Action</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product let-i="rowIndex">
+            <tr>
+                <td>{{i+1}}</td>
+                <td>{{product.productName}}</td>
+                <td>
+                    <div class="field-checkbox">
+                        <p-checkbox [(ngModel)]="product.isActive" [binary]="true" inputId="binary" [disabled]="true">
+                        </p-checkbox>
+                        <label for="binary" *ngIf="product.isActive === true">Active</label>
+                        <label for="binary" *ngIf="product.isActive === false">Not Active</label>
+                    </div>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-submit me-2" routerLink="/products/add-galleries">
+                        <i class="bi bi-pencil-square"></i>
+                    </button>
+                    <button type="button" class="btn btn-remove">
+                        <i class="bi bi-trash-fill"></i>
+                    </button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
 </div>

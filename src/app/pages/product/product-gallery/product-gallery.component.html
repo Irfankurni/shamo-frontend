@@ -1,0 +1,7 @@
+<div class="container">
+    <p-fileUpload name="gallery" [multiple]="true" [customUpload]="true" (uploadHandler)="onChangeFile($event)" accept=".pdf, .png, .jpg, jpeg">
+    </p-fileUpload>
+    <button (click)="log()">LOG</button>
+
+    <pre>{{gallery | json}}</pre>
+</div>
