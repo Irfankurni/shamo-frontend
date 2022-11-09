@@ -12,6 +12,7 @@ import { ProductCreateComponent } from './product-create/product-create.componen
 import { ProductEditComponent } from './product-edit/product-edit.component';
 import { ProductGalleryComponent } from './product-gallery/product-gallery.component';
 import { FileUploadModule } from 'primeng/fileupload';
+import { TooltipModule } from 'primeng/tooltip';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { FileUploadModule } from 'primeng/fileupload';
     DialogModule,
     InputTextModule,
     ButtonModule,
-    FileUploadModule
+    FileUploadModule,
+    TooltipModule
   ]
 })
 export class ProductModule { }

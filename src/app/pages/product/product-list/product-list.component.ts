@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { FindAllProductRes } from 'src/app/dto/product';
 import { ProductService } from 'src/app/service';
@@ -10,7 +11,7 @@ import { ProductService } from 'src/app/service';
 })
 export class ProductListComponent implements OnInit, OnDestroy {
 
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService, private router: Router) { }
   products: FindAllProductRes = new FindAllProductRes()
   productsSubs?: Subscription
 
@@ -22,6 +23,10 @@ export class ProductListComponent implements OnInit, OnDestroy {
     this.productsSubs = this.productService.findAll().subscribe(res => {
       this.products = res
     })
+  }
+
+  addPhoto(id: number): void {
+    this.router.navigateByUrl(`/products/add-galleries/${id}`)
   }
 
   ngOnDestroy(): void {

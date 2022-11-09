@@ -14,7 +14,7 @@ const routes: Routes = [
         component: ProductCreateComponent
     },
     {
-        path: 'add-galleries',
+        path: 'add-galleries/:id',
         component: ProductGalleryComponent
     }
 ]
