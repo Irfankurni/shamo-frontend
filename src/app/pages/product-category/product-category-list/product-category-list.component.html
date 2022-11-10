@@ -12,7 +12,7 @@
             <tr>
                 <th>No.</th>
                 <th>Product Category</th>
-                <th>Is Active</th>
+                <th>Active</th>
                 <th>Action</th>
             </tr>
         </ng-template>
@@ -29,7 +29,7 @@
                     </div>
                 </td>
                 <td>
-                    <button type="button" class="btn btn-submit me-2">
+                    <button type="button" class="btn btn-submit me-2" (click)="editCategory(category)">
                         <i class="bi bi-pencil-square"></i>
                     </button>
                     <button type="button" class="btn btn-remove" (click)="confirm(category.id)">
@@ -42,18 +42,25 @@
     <p-dialog [(visible)]="categoryDialog" [style]="{width: '450px'}" header="Product Details" [modal]="true"
         class="p-fluid">
         <ng-template pTemplate="content">
-            <form class="field">
+            <form class="field" (ngSubmit)="submit()" ngNativeValidate>
                 <label for="category">Product Category</label>
-                <input type="text" pInputText id="category" name="category" [(ngModel)]="category.category" required
+                <input type="text" class="" pInputText id="category" name="category" [(ngModel)]="category.category" required
                     autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !category.category}" />
-                <small class="ng-dirty ng-invalid" *ngIf="submitted && !category.category">Category is required.</small>
+                <small class="p-error block" *ngIf="submitted && !category.category">Category is required.</small>
+                <div class="mt-2" *ngIf="category.isActive !== undefined">
+                    <label for="isActive" class="block">Active</label>
+                    <p-checkbox [(ngModel)]="category.isActive" [binary]="true" inputId="binary" name="isActive">
+                    </p-checkbox>
+                    <small class="p-error block" *ngIf="submitted && !category.isActive">Active is required.</small>
+                </div>
             </form>
         </ng-template>
 
         <ng-template pTemplate="footer">
             <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text text-danger"
                 (click)="hideDialog()"></button>
-            <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" [style]="{color: '#6C5ECF'}" (click)="submit()"></button>
+            <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" [style]="{color: '#6C5ECF'}"
+                (click)="submit()"></button>
         </ng-template>
     </p-dialog>
     <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text text-danger">

@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ConfirmationService } from 'primeng/api';
+import { Subscription } from 'rxjs';
 import { FindAllProductGalleryRes } from 'src/app/dto/product-gallery/find-all-gallery-res';
 import { InsertProductGalleryReq } from 'src/app/dto/product-gallery/gallery-req';
 import { ProductGalleryReqData } from 'src/app/dto/product-gallery/gallery-req-data';
@@ -9,20 +11,25 @@ import { ProductGallerService } from 'src/app/service';
 @Component({
   selector: 'app-product-gallery',
   templateUrl: './product-gallery.component.html',
-  styleUrls: ['./product-gallery.component.css']
+  styleUrls: ['./product-gallery.component.css'],
+  providers: [ConfirmationService]
 })
-export class ProductGalleryComponent implements OnInit {
+export class ProductGalleryComponent implements OnInit, OnDestroy {
 
-  idParam!: number
   galleries: InsertProductGalleryReq = new InsertProductGalleryReq
-  gallery: ProductGalleryReqData = new ProductGalleryReqData
   data: FindAllProductGalleryRes = new FindAllProductGalleryRes
+  gallery: ProductGalleryReqData = new ProductGalleryReqData
+  deleteSubscription?: Subscription
+  galleryDialog: boolean = false
+  idParam!: number
+  idDelete!: number
 
   constructor(
     private fileService: FileService,
     private activateRoute: ActivatedRoute,
     private galleryService: ProductGallerService,
-    private router: Router
+    private router: Router, 
+    private confirmationService: ConfirmationService
     ) { }
 
   ngOnInit(): void {
@@ -40,15 +47,27 @@ export class ProductGalleryComponent implements OnInit {
     })
   }
 
+  openDialog(): void {
+    this.galleries = new InsertProductGalleryReq
+    this.galleryDialog = true
+  }
+
+  hideDialog(): void {
+    this.galleryDialog = false
+    this.initData(this.idParam)
+  }
+
+
   onChangeFile(event: any): void {
     let gal: ProductGalleryReqData[] = []
     this.galleries.galleries = gal
-    for (const file of event.files) {
-      this.fileService.uploadAsBase64(file).then(res => {
-        this.gallery.fileName = res[0]
-        this.gallery.fileExtension = res[1]
+    for (let i = 0; i < event.files.length; i++) {
+      this.fileService.uploadAsBase64(event.files[i]).then(res => {
+        const file: ProductGalleryReqData = new ProductGalleryReqData
+        file.fileName = res[0]
+        file.fileExtension = res[1]
 
-        gal.push(this.gallery)
+        gal.push(file)
       })
     }
   }
@@ -58,6 +77,32 @@ export class ProductGalleryComponent implements OnInit {
     this.galleryService.insert(this.galleries).subscribe(res => {
         this.router.navigateByUrl('/products')
     })
+  }
+
+  onDelete(id: number): void {
+    this.idDelete = id
+  }
+
+  delete(): void {
+    this.deleteSubscription = this.galleryService.delete(this.idDelete).subscribe(res => {
+      this.initData(this.idParam)
+    })
+  }
+
+  confirm(id: number) {
+    this.idDelete = id
+    this.confirmationService.confirm({
+      message: 'Are you sure that you want to proceed?',
+      header: 'Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.delete()
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+   this.deleteSubscription?.unsubscribe()
   }
 
 }

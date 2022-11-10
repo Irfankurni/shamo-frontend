@@ -19,12 +19,13 @@ export class ProductCategoryListComponent implements OnInit, OnDestroy {
     private router: Router,
     private confirmationService: ConfirmationService) { }
 
-    categories: FindAllProductCategoryRes = new FindAllProductCategoryRes()
-    category: InsertProductCategoryReq = new InsertProductCategoryReq()
-    categoryDialog: boolean = false
-    categorySubs?: Subscription
-    submitted: boolean = false
-    idDeleted!: number
+  categories: FindAllProductCategoryRes = new FindAllProductCategoryRes()
+  category: InsertProductCategoryReq = new InsertProductCategoryReq()
+  categoryDialog: boolean = false
+  categorySubs?: Subscription
+  submitted: boolean = false
+  isUpdate: boolean = false
+  idDeleted!: number
 
   ngOnInit(): void {
     this.initData()
@@ -39,19 +40,36 @@ export class ProductCategoryListComponent implements OnInit, OnDestroy {
   openDialog(): void {
     this.category = new InsertProductCategoryReq()
     this.categoryDialog = true
+    this.isUpdate = false
   }
 
   hideDialog(): void {
     this.categoryDialog = false
+    this.submitted = false
+    this.initData()
+  }
+
+  editCategory(category: InsertProductCategoryReq): void {
+    this.category = category
+    this.isUpdate = true
+    this.categoryDialog = true
   }
 
   submit(): void {
     this.submitted = true
-    this.categoryService.insert(this.category).subscribe(res => {
-      this.categoryDialog = false
-      this.initData()
-      this.submitted = false
-    })
+    if(this.isUpdate === false && this.category.category){
+        this.categoryService.insert(this.category).subscribe(res => {
+          this.categoryDialog = false
+          this.initData()
+          this.submitted = false
+        })
+    } else if(this.isUpdate === true && this.category.category && this.category.isActive){
+      this.categoryService.update(this.category).subscribe(res => {
+        this.categoryDialog = false
+        this.initData()
+        this.submitted = false
+      })
+    }
   }
 
   onDelete(id: number): void {

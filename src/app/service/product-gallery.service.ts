@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { InsertRes } from "../dto";
+import { DeleteRes, InsertRes } from "../dto";
 import { FindAllProductGalleryRes } from "../dto/product-gallery/find-all-gallery-res";
 import { InsertProductGalleryReq } from "../dto/product-gallery/gallery-req";
 import { BASE_URL } from "./base-url";
@@ -19,6 +19,10 @@ export class ProductGallerService {
 
     findAllByProduct(productId: number): Observable<FindAllProductGalleryRes> {
         return this.http.get<FindAllProductGalleryRes>(`${BASE_URL}/galleries/${productId}`)
+    }
+
+    delete(id: number): Observable<DeleteRes> {
+        return this.http.delete<DeleteRes>(`${BASE_URL}/galleries/${id}`)
     }
 
 }

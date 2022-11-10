@@ -1,5 +1,54 @@
 <div class="container">
-    <!-- <p-fileUpload name="gallery" [multiple]="true" [auto]="true" [customUpload]="true" (uploadHandler)="onChangeFile($event)" accept=".pdf, .png, .jpg, jpeg">
-    </p-fileUpload>
-    <button class="btn btn-primary" (click)="addPhoto()">Upload</button> -->
+    <div class="container">
+        <p-table [value]="data.data" styleClass="p-datatable-striped mt-8" responsiveLayout="scroll">
+            <ng-template pTemplate="caption">
+                <div class="d-flex justify-content-between">
+                    <button class="btn btn-submit" routerLink="/products"><i class="bi bi-arrow-left"></i> BACK</button>
+                    <div class="table-header">
+                        List of Product Gallery
+                    </div>
+                    <button class="btn btn-submit" (click)="openDialog()"><i class="bi bi-plus-lg"></i> ADD</button>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>No.</th>
+                    <th>Photo</th>
+                    <th>Action</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-product let-i="rowIndex">
+                <tr>
+                    <td>{{i+1}}</td>
+                    <td>
+                        <img *ngIf="product.fileId !== null" src="http://localhost:5000/files/{{product.fileId}}" alt=""
+                            width="150">
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-remove" pTooltip="Remove" tooltipPosition="bottom"
+                            [showDelay]="1000" (click)="confirm(product.id)">
+                            <i class="bi bi-trash-fill"></i>
+                        </button>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+    <p-dialog [(visible)]="galleryDialog" [style]="{width: '800px'}" header="Product Details" [modal]="true"
+        class="p-fluid">
+        <ng-template pTemplate="content">
+            <p-fileUpload name="gallery" [multiple]="true" [customUpload]="true" [auto]="true"
+                (uploadHandler)="onChangeFile($event)" accept=".pdf, .png, .jpg, jpeg">
+            </p-fileUpload>
+        </ng-template>
+
+        <ng-template pTemplate="footer">
+            <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text text-danger"
+                (click)="hideDialog()"></button>
+            <button pButton pRipple label="Upload" icon="pi pi-check" class="p-button-text" [style]="{color: '#6C5ECF'}"
+                (click)="addPhoto()"></button>
+        </ng-template>
+    </p-dialog>
+    <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text">
+    </p-confirmDialog>
 </div>

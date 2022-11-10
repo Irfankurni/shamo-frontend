@@ -13,7 +13,10 @@ import { ProductEditComponent } from './product-edit/product-edit.component';
 import { ProductGalleryComponent } from './product-gallery/product-gallery.component';
 import { FileUploadModule } from 'primeng/fileupload';
 import { TooltipModule } from 'primeng/tooltip';
-
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { DropdownModule } from 'primeng/dropdown';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,11 @@ import { TooltipModule } from 'primeng/tooltip';
     InputTextModule,
     ButtonModule,
     FileUploadModule,
-    TooltipModule
+    TooltipModule,
+    ConfirmDialogModule,
+    DropdownModule,
+    InputNumberModule,
+    InputTextareaModule
   ]
 })
 export class ProductModule { }
