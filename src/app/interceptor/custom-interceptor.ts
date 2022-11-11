@@ -55,7 +55,6 @@ export class CustomInterCeptor {
                         }
                     }
 
-
                     if (result.status == 401) {
                         if (!isLoginReq) {
                             this.router.navigateByUrl('/login')
