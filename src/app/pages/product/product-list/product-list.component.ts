@@ -4,7 +4,7 @@ import { ConfirmationService } from 'primeng/api';
 import { Subscription } from 'rxjs';
 import { FindAllProductRes, InsertProductReq } from 'src/app/dto/product';
 import { FindAllProductCategoryRes } from 'src/app/dto/product-category';
-import { ProductCategoryService, ProductService } from 'src/app/service';
+import { BASE_URL, ProductCategoryService, ProductService } from 'src/app/service';
 
 @Component({
   selector: 'app-product-list',
@@ -27,6 +27,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
   submitted: boolean = false
   isUpdate: boolean = false
   idDeleted!: number
+  baseUrl: string = BASE_URL
 
   ngOnInit(): void {
     this.initData()

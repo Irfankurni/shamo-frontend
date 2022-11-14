@@ -1,5 +1,6 @@
 <div class="container">
-    <p-table [value]="products.data" styleClass="p-datatable-striped mt-8" responsiveLayout="scroll">
+    <p-table [value]="products.data" styleClass="p-datatable-striped mt-8" responsiveLayout="scroll"
+    [rows]="10" [rowsPerPageOptions]="[10,25,50]" [paginator]="true">
         <ng-template pTemplate="caption">
             <div class="d-flex justify-content-between">
                 <div class="table-header">
@@ -22,10 +23,10 @@
             <tr>
                 <td>{{i+1}}</td>
                 <td>
-                    <img *ngIf="product.fileId !== null" src="http://localhost:5000/files/{{product.fileId}}" alt=""
-                        width="80" height="60">
+                    <img *ngIf="product.fileId !== null" src="{{baseUrl}}/files/{{product.fileId}}" alt=""
+                        width="80">
                     <img *ngIf="product.fileId === null" src="../../../../assets/images/unavailable.png" alt=""
-                    width="60" height="60">
+                    width="80">
                 </td>
                 <td>{{product.productName}}</td>
                 <td>{{product.categoryName}}</td>

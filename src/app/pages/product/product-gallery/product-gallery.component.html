@@ -21,7 +21,7 @@
                 <tr>
                     <td>{{i+1}}</td>
                     <td>
-                        <img *ngIf="product.fileId !== null" src="http://localhost:5000/files/{{product.fileId}}" alt=""
+                        <img *ngIf="product.fileId !== null" src="{{baseUrl}}/files/{{product.fileId}}" alt=""
                             width="150">
                     </td>
                     <td>

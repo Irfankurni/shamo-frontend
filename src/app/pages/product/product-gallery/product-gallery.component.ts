@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import { FindAllProductGalleryRes } from 'src/app/dto/product-gallery/find-all-gallery-res';
 import { InsertProductGalleryReq } from 'src/app/dto/product-gallery/gallery-req';
 import { ProductGalleryReqData } from 'src/app/dto/product-gallery/gallery-req-data';
-import { FileService } from 'src/app/service';
+import { BASE_URL, FileService } from 'src/app/service';
 import { ProductGallerService } from 'src/app/service';
 
 @Component({
@@ -23,6 +23,7 @@ export class ProductGalleryComponent implements OnInit, OnDestroy {
   galleryDialog: boolean = false
   idParam!: number
   idDelete!: number
+  baseUrl: string = BASE_URL
 
   constructor(
     private fileService: FileService,
